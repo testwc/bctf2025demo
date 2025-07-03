@@ -1,0 +1,19 @@
+name: Deploy Remote Server
+
+on:
+  push:
+    branches:
+      - master 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        whith:
+            ref:${{ github.event.pull_request.head.sha }}
+            fetch-depath: 0
+      - name: Build image
+        run: build.sh
